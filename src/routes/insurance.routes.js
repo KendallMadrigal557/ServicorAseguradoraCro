@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const cors = require('cors');
 const insuranceController = require('../controllers/insurance.controller');
+
+router.use(cors());
 
 router.post('/insurance', insuranceController.createInsurance);
 router.get('/insurance', insuranceController.getAllInsurances);

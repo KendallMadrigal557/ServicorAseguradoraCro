@@ -3,14 +3,18 @@ const Insurance = require('../models/insurance.model');
 const createInsurance = async (req, res) => {
     try {
         const { type, description, price, companyName } = req.body;
+        console.log(req.body);
+        console.log(type, description, price, companyName);
         const newInsurance = new Insurance({
             type,
             description,
             price,
             company: { name: companyName },
         });
-        const savedInsurance = await newInsurance.save();
-        res.status(201).json(savedInsurance);
+        newInsurance 
+        .save()
+        .then((data) => res.json(data))
+        .catch((error) => res.json({ message: error }));
     } catch (error) {
         res.status(500).json({ error: 'Could not create insurance.' });
     }
